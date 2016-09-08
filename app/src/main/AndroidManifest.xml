@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.learzhu.multiscreen">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:resizeableActivity="true"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!--在清单文件的 <activity>或 <application>节点中设置该属性，启用或禁用多窗口显示：-->
+        <!--android:resizeableActivity=["true" | "false"]-->
+        <!--如果该属性设置为 true，Activity 将能以分屏和自由形状模式启动。 如果此属性设置为 false，Activity 将不支持多窗口模式。 -->
+        <!--如果该值为 false，且用户尝试在多窗口模式下启动 Activity，该 Activity 将全屏显示。-->
+
+        <!--给Activity加上如下配置可以保证切换成多屏模式或者画中画模式时Activity不会销毁重建。-->
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:supportsPictureInPicture="true">
+            <!--如果您的应用面向 Android N，但未对该属性指定值，则该属性的值默认设为 true。-->
+            <!--如果做电视开发或其它特殊需求，还有一个属性需要注意：-->
+            <!--android:supportsPictureInPicture=["true" | "false"]-->
+
+            <!--对于 Android N，<layout>清单文件元素支持以下几种属性，这些属性影响 Activity 在多窗口模式中的行为：-->
+            <!--android:defaultWidth 以自由形状模式启动时 Activity 的默认宽度。-->
+            <!--android:defaultHeight 以自由形状模式启动时 Activity 的默认高度。-->
+            <!--android:gravity 以自由形状模式启动时 Activity 的初始位置。-->
+            <!--android:minimalSize 分屏和自由形状模式中 Activity 的最小高度和最小宽度。 如果用户在分屏模式中移动分界线，-->
+            <!--使 Activity 尺寸低于指定的最小值，系统会将 Activity 裁剪为用户请求的尺寸。-->
+
+            <!--在设备处于多窗口模式中时，某些功能会被禁用或忽略，因为这些功能对与其他 Activity 或应用共享设备屏幕的 Activity 而言没有意义。 此类功能包括：-->
+            <!--某些自定义选项将被禁用；例如，在非全屏模式中，应用无法隐藏状态栏。-->
+            <!--系统将忽略对 android:screenOrientation属性所作的更改-->
+            <layout
+                android:defaultHeight="500dp"
+                android:defaultWidth="600dp"
+                android:gravity="top|end"
+                android:minHeight="450dp"
+                android:minWidth="450dp" />
+            <!--android:minimalSize="450dp" 无效没有此属性  编译无法通过-->
+            <!--编译可以通过无法运行  debug出错-->
+            <!--android:minimalWidth="450dp"-->
+            <!--android:minimalHeight="450dp"-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
